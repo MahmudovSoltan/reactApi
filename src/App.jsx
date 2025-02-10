@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Basket from "./basket/Basket";
 import Home from "./pages/home/Home";
 import Leyout from "./components/leyout/Leyout";
