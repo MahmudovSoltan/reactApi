@@ -1,0 +1,79 @@
+
+/* Ana Konteyner */
+.detail-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 20px;
+    /* max-width: 900px; */
+    width: 100%;
+    margin-top: 100px;
+  }
+  
+  /* Şəkil Bölməsi */
+  .product-image-section {
+    flex: 1;
+  }
+  
+  .product-image {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  
+  /* Məhsul Məlumat Bölməsi */
+  .product-info-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .product-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .product-category {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 12px;
+  }
+  
+  .product-description {
+    font-size: 22px;
+    color: #444;
+    line-height: 1.5;
+    margin-bottom: 15px;
+  }
+  
+  .product-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .product-rating {
+    font-size: 14px;
+    color: #ff9800;
+    margin-bottom: 20px;
+  }
+  
+  /* Düymə Stili */
+  .add-to-basket-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: flex-start;
+  }
+  
+  .add-to-basket-btn:hover {
+    background-color: #218838;
+  }

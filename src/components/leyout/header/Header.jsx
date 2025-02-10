@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import { SlBasket } from "react-icons/sl";
 import "./navbar.css";
@@ -6,10 +6,13 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 const Header = () => {
-  const{totalCount} = useSelector((state)=>state.products)
+  const { totalCount } = useSelector((state) => state.products);
   return (
     <header>
-      <Navbar expand="lg" className="bg-body-tertiary bg-dark text-white header">
+      <Navbar
+        expand="lg"
+        className="bg-body-tertiary bg-dark text-white header"
+      >
         <Container>
           <Navbar.Brand href="#home" className="navbar_logo">
             <img src={logo} alt="" />
@@ -21,10 +24,10 @@ const Header = () => {
             </Nav>
           </Navbar.Collapse>
 
-          <Link to={"/basket"} className="basket_icons">
+          <NavLink to={"/basket"} className="basket_icons">
             <SlBasket size={30} />
             <span>{totalCount}</span>
-          </Link>
+          </NavLink>
         </Container>
       </Navbar>
     </header>

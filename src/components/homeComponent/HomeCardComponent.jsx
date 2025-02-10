@@ -5,10 +5,18 @@ import { addToBasket } from "../../redux/slices/allProductSclice";
 import "./homeComponent.css";
 import { SlBasket } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const HomeCardComponent = ({ item }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
+  const handleAddToBasket = () => {
+    dispatch(addToBasket(item))
+    toast.success("Product successfully added to the basket!");
+  };
 
+
+  
   return (
     <div>
       <Card style={{ width: "18rem",marginTop:"85px" }}>
@@ -23,9 +31,10 @@ const HomeCardComponent = ({ item }) => {
           <Card.Text>{item.body}</Card.Text>
           <div className="d-flex justify-content-between">
           <Button variant="primary" >{item.price} ₼</Button>
-          <Button variant="success" className="d-flex align-items-center gap-2 " onClick={() => dispatch(addToBasket(item))}>
+          <Button variant="success" className="d-flex align-items-center gap-2 " onClick={() =>handleAddToBasket(item) }>
             Add basket  <SlBasket/>
           </Button>
+          <ToastContainer position="bottom-right" autoClose={3000} />
 
           </div>
         </Card.Body>

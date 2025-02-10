@@ -1,8 +1,97 @@
-.home_container{
+.home_container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     flex-wrap: wrap;
     padding: 30px 50px;
     gap: 30px;
 }
+
+/* Pagination üçün əsas stil */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+    padding: 20px 0;
+    list-style: none;
+  }
+  
+  /* Pagination düymələri */
+  .pagination li {
+    display: inline-block;
+    margin: 0 5px;
+  }
+  
+  .pagination li a {
+    display: block;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  /* Aktiv səhifə */
+  .pagination li.selected a {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+  
+  /* Düymələrin hover effekti */
+  .pagination li a:hover {
+    background-color: #007bff;
+    color: white;
+    /* transform: translateY(-2px); */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Əvvəlki və Növbəti düymələri */
+  .pagination li.previous,
+  .pagination li.next {
+    font-weight: bold;
+  }
+  
+  .pagination li.previous a,
+  .pagination li.next a {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+  }
+  
+  .pagination li.previous a:hover,
+  .pagination li.next a:hover {
+    background-color: #218838;
+  }
+  
+  /* Passiv düymələr (məsələn, birinci səhifədə "Əvvəlki" düyməsi) */
+  .pagination li.disabled a {
+    background-color: #6c757d;
+    color: white;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+  
+  .pagination li.disabled a:hover {
+    background-color: #6c757d;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  /* Ellipsis (...) üçün stil */
+  .pagination li.break a {
+    cursor: default;
+    color: #6c757d;
+    border: none;
+    background-color: transparent;
+  }
+  
+  .pagination li.break a:hover {
+    background-color: transparent;
+    color: #6c757d;
+  }

@@ -1,16 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// export  const  getAllProducts = createAsyncThunk("fetchAllProduct",async()=>{
-//     const response = await fetch("https://fakestoreapi.com/products")
-//     const data = await response.json()
-//     return data
-// })
 
+const calculateTotalPrice = (basket) => {
+  return basket.reduce((total, item) => total + item.price * item.count, 0);
+};
 const initialState = {
   products: JSON.parse(localStorage.getItem("basket")) || [],
   totalCount:JSON.parse(localStorage.getItem("count")) || 0,
+  totalAmount:calculateTotalPrice(JSON.parse(localStorage.getItem("basket")))
 };
-console.log();
+
 
 export const productsSlice = createSlice({
   name: "products",
@@ -29,6 +28,7 @@ export const productsSlice = createSlice({
       }
       localStorage.setItem("count", JSON.stringify(state.totalCount));
       localStorage.setItem("basket", JSON.stringify(state.products));
+      state.totalAmount = calculateTotalPrice(state.products)
     },
     decrimentCount: (state, action) => {
       let findCount = state.products.find((item) => item.id == action.payload);
@@ -36,6 +36,7 @@ export const productsSlice = createSlice({
       state.totalCount++;
       localStorage.setItem("count",JSON.stringify(state.totalCount))
       localStorage.setItem("basket", JSON.stringify(state.products));
+      state.totalAmount = calculateTotalPrice(state.products)
     },
     increMentCount: (state, action) => {
       let findCount = state.products.find((item) => item.id == action.payload);
@@ -48,11 +49,27 @@ export const productsSlice = createSlice({
       }
       localStorage.setItem("count",JSON.stringify(state.totalCount))
       localStorage.setItem("basket", JSON.stringify(state.products));
+      state.totalAmount = calculateTotalPrice(state.products)
     },
+    deleteProduct:(state,action)=>{
+      let deleteItem = state.products.filter((item)=>item.id !== action.payload.id)
+      state.products = deleteItem
+      state.totalCount -= action.payload.count
+      localStorage.setItem("count",JSON.stringify(state.totalCount))
+      localStorage.setItem("basket", JSON.stringify(state.products));
+      state.totalAmount = calculateTotalPrice(state.products)
+    },
+    clearBasket:(state)=>{
+      state.products = []
+      state.totalCount =0
+      localStorage.setItem("count",JSON.stringify(state.totalCount))
+      localStorage.setItem("basket", JSON.stringify(state.products));
+      state.totalAmount = calculateTotalPrice(state.products)
+    }
   },
 });
 
-export const { addToBasket, decrimentCount, increMentCount } =
+export const { addToBasket, decrimentCount, increMentCount,deleteProduct,clearBasket } =
   productsSlice.actions;
 
 export default productsSlice.reducer;

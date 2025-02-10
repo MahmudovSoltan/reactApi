@@ -3,57 +3,60 @@ import { useGetAllProductsQuery } from "../../redux/services/product";
 import { useEffect, useState } from "react";
 import Loading from "../../components/loading/Loading";
 import "./detail.css";
-import { Button, Card } from "react-bootstrap";
 import { addToBasket } from "../../redux/slices/allProductSclice";
 import { SlBasket } from "react-icons/sl";
 import { useDispatch } from "react-redux";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Detail = () => {
   const dispatch = useDispatch();
-  const [detail, setDetail] = useState();
   const { id } = useParams();
   const { data, isLoading } = useGetAllProductsQuery();
+  const [detail, setDetail] = useState(null);
 
   useEffect(() => {
-    setDetail(data?.filter((item) => item.id == id));
-  }, []);
-  console.log(detail);
-  if (isLoading) {
-    return (
-      <div>
-        <Loading />
-      </div>    
-    );
+    if (data) {
+      setDetail(data.find((item) => item.id == id));
+    }
+  }, [data, id]);
+
+  if (isLoading) return <Loading />;
+
+  if (!detail) {
+    return <div>Məhsul tapılmadı!</div>;
   }
+  console.log(detail);
+  const handleAddToBasket = () => {
+    dispatch(addToBasket(detail))
+    toast.success("Product successfully added to the basket!");
+  };
   return (
     <div>
-      {
-        detail?.map((data,i)=>(
-      <Card key={i} style={{ width: "18rem", marginTop: "85px" }}>
-        <Card.Body style={{ width: "286px", height: "500px" }}>
-          <Card.Img
-            style={{ height: "336px", cursor: "pointer" }}
-            src={data.image}
-          ></Card.Img>
-          <Card.Title style={{ height: "70px", marginTop: "10px" }}>
-            {data.title.substring(1, 30)}
-          </Card.Title>
-          <Card.Text>{data.body}</Card.Text>
-          <div className="d-flex justify-content-between">
-            <Button variant="primary">{data.price} ₼</Button>
-            <Button
-              variant="success"
-              className="d-flex align-items-center gap-2 "
-              onClick={() => dispatch(addToBasket(data))}
-            >
-              Add basket <SlBasket />
-            </Button>
-          </div>
-        </Card.Body>
-      </Card>
+      <div className="detail-container">
+        <div className="product-image-section">
+          <img
+            src={detail.image}
+            alt="Product Image"
+            className="product-image"
+          />
+        </div>
 
-        ))
-      }
+        <div className="product-info-section">
+          <h2 className="product-title">{detail.title}</h2>
+          <p className="product-category">{detail.category}</p>
+          <p className="product-description">{detail.description}</p>
+          <p className="product-price">{detail.price} ₼</p>
+
+
+          <button
+            className="add-to-basket-btn"
+            onClick={handleAddToBasket }
+          >
+            Add to Basket  <SlBasket/>
+          </button>
+          <ToastContainer position="bottom-right" autoClose={3000} />
+        </div>
+      </div>
     </div>
   );
 };
