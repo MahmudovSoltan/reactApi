@@ -95,3 +95,9 @@
     background-color: transparent;
     color: #6c757d;
   }
+
+  @media screen and (max-width: 600px) {
+   .home_container {
+    justify-content: center;
+   }
+  }

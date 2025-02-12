@@ -77,3 +77,15 @@
   .add-to-basket-btn:hover {
     background-color: #218838;
   }
+
+
+  @media screen and (max-width: 600px) {
+    .detail-container {
+      flex-direction: column;
+    }
+    .product-image-section{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }

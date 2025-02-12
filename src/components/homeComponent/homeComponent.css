@@ -23,6 +23,7 @@
   .category-list {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 30px;
     list-style: none;
     padding: 0;
@@ -57,4 +58,10 @@
     color: white !important;
     border-color: #007bff;
     font-weight: bold;
+  }
+
+  @media screen and (max-width: 600px) {
+  .category-list{
+    justify-content: center;
+  }
   }

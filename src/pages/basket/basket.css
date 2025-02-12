@@ -103,3 +103,21 @@
     font-size: 1.5rem;
     color: #555;
   }
+
+  @media screen and (max-width: 600px) {
+    .basket_main{
+      flex-direction: column-reverse;
+    }
+    .basket-total-container{
+      position: static;
+      width: 95%;
+      margin: 100px auto 0;
+    }
+    .card{
+      margin-top: 20px !important;
+    }
+    .basket_container{
+      width: 100%;
+      justify-content: center;
+    }
+  }
